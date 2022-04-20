@@ -12,12 +12,6 @@
 
 #include "minitalk.h"
 
-void	recev_it(int sig)
-{
-	if (sig == SIGUSR1)
-		ft_printf("rah msg wssl\n");
-}
-
 void	send_it(char c, int pid)
 {
 	int	i;
@@ -25,7 +19,7 @@ void	send_it(char c, int pid)
 	i = 0;
 	while (i < 8)
 	{
-		if ((128 >> i) & c)
+		if (!((c >> i) & 1))
 			kill (pid, SIGUSR1);
 		else
 			kill (pid, SIGUSR2);
@@ -47,8 +41,6 @@ int	main(int argc, char **argv)
 			exit(-1);
 		i = 0;
 		l = ft_strlen(argv[2]);
-		signal(SIGUSR1, recev_it);
-		// WA AKHI TALIB , WA HADCHI TAL BOUNUS 7YD HD L9LAWI WA CHOKRAN
 		while (i <= l)
 		{
 			send_it(argv[2][i], pid);

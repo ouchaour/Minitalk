@@ -6,7 +6,7 @@
 /*   By: yait-ouc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:42:33 by yait-ouc          #+#    #+#             */
-/*   Updated: 2022/04/15 01:48:05 by yait-ouc         ###   ########.fr       */
+/*   Updated: 2022/04/15 01:48:54 by yait-ouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ void	hundle_it(int sig, siginfo_t *si, void *context)
 	if (g_mini.bit == 8)
 	{
 		ft_printf("%c", g_mini.c);
+		if (!g_mini.c)
+		{
+			kill(si->si_pid, SIGUSR2);
+		}
 		initialization();
 	}
 	g_mini.pid = si->si_pid;
